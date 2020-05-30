@@ -1,0 +1,56 @@
+int led = D6; //define variable for led
+
+void buddyFunction(const char *event, const char *data);
+
+void setup()
+{
+    Particle.subscribe("Deakin_RIOT_SIT210_Photon_Buddy", buddyFunction);//Listen for event name and call buddyFunction function when recieved
+
+    pinMode(led, OUTPUT);// set led pin as output
+    digitalWrite(led, LOW);
+}
+
+void buddyFunction(const char *event, const char *data)  //return from the buddy particle device
+{
+    if (strcmp(data, "wave") == 0) //check if buddy sent wave
+    {
+       Particle.publish("Buddy Signal", "Wave", PRIVATE); //Check if buddy sent wave
+
+        digitalWrite(led, HIGH);
+        delay(1000);
+        digitalWrite(led, LOW);
+        delay(1000);
+        digitalWrite(led, HIGH);
+        delay(1000);
+        digitalWrite(led, LOW);
+        delay(1000);
+        digitalWrite(led, HIGH);
+        delay(1000);
+        digitalWrite(led, LOW);
+    }
+
+    else if (strcmp(data, "pat") == 0) //check if buddy sent pat
+    {
+         Particle.publish("Buddy Signal", "Pat", PRIVATE);
+         digitalWrite(led, HIGH);
+         delay(300);
+         digitalWrite(led, LOW);
+         delay(300);
+         digitalWrite(led, HIGH);
+         delay(300);
+         digitalWrite(led, LOW);
+         delay(300);
+         digitalWrite(led, HIGH);
+         delay(300);
+         digitalWrite(led, LOW);
+
+    
+
+    }
+
+}
+
+void loop()
+{
+
+}
